@@ -16,7 +16,7 @@ if ($result) {
             "amount" => (int)$price,
             "msisdn" => $mobile,
             "gatewayId" => 100,
-            "callbackUrl" => $rayan_pay->getUrl()."/verify.php?referenceId=".$order_id."&price=".$price,
+            "callbackUrl" => $rayan_pay->getUrl()."verify.php?referenceId=".$order_id."&price=".$price,
             "gateSwitchingAllowed" => true
 
         ];
