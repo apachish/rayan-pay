@@ -8,43 +8,43 @@ $result = $rayan_pay->auth();
 if ($result) {
     $order_id = $_POST['order_id'];
     $price = $_POST['price'];
+    $mobile = !empty($_POST['mobile'])?$_POST['mobile']:"";
     try {
         $data = [
 
             "referenceId" => (int)$order_id,
             "amount" => (int)$price,
-            "msisdn" => "",
+            "msisdn" => $mobile,
             "gatewayId" => 100,
-            "callbackUrl" => $_SERVER['HTTP_REFERER']."verify.php?referenceId=".$order_id."&price=".$price,
+            "callbackUrl" => $rayan_pay->getUrl()."/verify.php?referenceId=".$order_id."&price=".$price,
             "gateSwitchingAllowed" => true
 
         ];
         $result_start = $rayan_pay->start($result, $data);
-        if (is_string($result_start))
+        if ($result_start['Status'] != 200)
         {
-            echo $result_start;
-            header("Location: ".$_SERVER['HTTP_REFERER']."?message=".$result_start);
-            exit;
+            echo "<br />کد خطا : ". $result_start["Status"];
+            echo $result_start["Message"];
+            echo "<br />مبلغ : ". $price;
+            echo "<br />کد پیگیری : ". $order_id;
+            echo "<br />data : ". json_encode($data);
+            echo "<br />return : ". json_encode($result_start["Response"]);
+            echo "<a href='".$_SERVER['HTTP_REFERER']."'> return form</a>";
         }
-        elseif (!empty($result_start['bankRedirectHtml']))
-            echo $result_start['bankRedirectHtml'];
+        elseif ($result_start['Status'] == 200)
+        {
+            $response =  json_decode($result_start['Response'],true);
+            echo $response['bankRedirectHtml'];
+        }
         else
+        {
+            echo "<br />کد خطا : ". $result_start["Status"];
+            echo "<br />return : ". json_encode($result_start["Response"]);
             echo "نتوانست انتقال یابد";
+        }
     } catch (HttpRequestException $exception) {
         $rayan_pay->dd($exception);
     } catch (Exception $exception) {
         $rayan_pay->dd($exception);
     }
 }
-
-
-//if (isset($result["Status"]) && $result["Status"] == 100)
-//{
-//	// Success and redirect to pay
-//	$zp->redirect($result["StartPay"]);
-//} else {
-//	// error
-//	echo "خطا در ایجاد تراکنش";
-//	echo "<br />کد خطا : ". $result["Status"];
-//	echo "<br />تفسیر و علت خطا : ". $result["Message"];
-//}

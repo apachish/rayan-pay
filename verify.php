@@ -29,7 +29,7 @@ if ($token) {
             echo "<br />کد خطا : ". $response["Status"];
             echo "<br />کد پیگیری : ". $response["RefID"];
             echo "<br />تفسیر و علت خطا : ". $response["Message"];
-            echo "<br />return : ". json_encode($data);
+            echo "<br />data : ". json_encode($data);
             echo "<br />return : ". json_encode($response["Response"]);
 
         }

@@ -74,8 +74,12 @@ class rayanpay
             return $this->start($token, $data);
         }
         $message = $this->getError($http_status, 'payment_start');
-        if ($message) return $message;
-        return json_decode($response, true);
+        return [
+            "Status" => $http_status,
+            "RefID" => $data['referenceId'],
+            "Message" => $message,
+            "Response" => $response
+        ];
     }
 
     public function verify($token, $data)
@@ -243,6 +247,16 @@ class rayanpay
     {
         var_dump($data);
         exit();
+    }
+
+    public function getUrl()
+    {
+        $protocl = "http:";
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+            $protocl = "https://";
+        }
+        $url = $protocl.'//'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']);
+        return $url;
     }
 
 
