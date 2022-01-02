@@ -36,4 +36,6 @@ if ($token) {
     }catch (Exception $exception){
         $rayan_pay->dd($exception);
     }
+}else{
+    echo "توکن نامعتبر می باشد";
 }
