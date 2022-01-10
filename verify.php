@@ -5,6 +5,8 @@ require_once("rayanpay.php");
 
 
 $rayan_pay = new rayanpay();
+
+$rayan_pay->request_id = $_GET['request_id'];
 $token = $rayan_pay->auth();
 if ($token) {
     $data = [
