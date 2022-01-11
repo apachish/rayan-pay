@@ -114,7 +114,6 @@ class rayanpay
         list($response, $http_status) = $this->getResponse($url, $data, $header);
 
         $message = $this->getError($http_status, 'token');
-
         return [
             "Status" => $http_status,
             "Message" => $message,
@@ -211,7 +210,7 @@ class rayanpay
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
+            CURLOPT_TIMEOUT => 200,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',

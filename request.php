@@ -26,8 +26,7 @@ if ($result['Status'] == 200) {
             "gateSwitchingAllowed" => true
 
         ];
-        $result_start = $rayan_pay->start($result, $data);
-        var_dump($result_start);exit;
+        $result_start = $rayan_pay->start($result['Response'], $data);
         if ($result_start['Status'] != 200)
         {
             echo "<br />کد خطا : ". $result_start["Status"];
