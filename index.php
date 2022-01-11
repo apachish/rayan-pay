@@ -61,8 +61,9 @@ if (!empty($_SESSION["error"])) {
     }
 }
 ?>
+    <p dir="rtl">
 این صفحه مواردی است که فرم خرید شما برای ادرس request.php  ارسال می کنید. مثلا شما فرم فاکتوری در سیستم خود دارید  مبلغ ان و شماره سفارش ان به اضافه اطلاعات  کاربریتان که نمونه در این فرم زده شده شما برای فایل request.php ارسال کرد تا به درگاه بانک وصل شود.
-
+</p>
 <div>
     <form action="./request.php" method="post">
         <label for="baseUrl">baseUrl<span class="text-danger">*</span> </label>
