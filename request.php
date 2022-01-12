@@ -9,6 +9,7 @@ $validation = $rayan_pay->validationForm($_POST);
 if(!empty($validation)){
     $_SESSION['error'] = $validation;
     @header('Location: ' . $rayan_pay->getUrl());
+    exit;
 }
 $result = $rayan_pay->auth();
 if ($result['Status'] == 200) {
