@@ -160,13 +160,19 @@ class rayanpay
         $url = $this->baseUrl . 'ipg/payment/response/parse';
         list($response, $http_status) = $this->getResponse($url, $data, $header);
         $result = json_decode($response, true);
+        $return = [
+            "Status" => 0,
+            "Response" => [],
+            "RefID" => $_GET['referenceId'],
+            "Amount" => $_GET['price'],
+            "Mobile" => !empty($_GET['mobile'])?$_GET['mobile']:"",
+            "Message"=> [],
+        ];
+
         if (!empty($result['paymentId']) && !empty($result['hashedBankCardNumber'])) {
-            return [
-                "Status" => $http_status,
-                "RefID" => $_GET['referenceId'],
-                "Amount" => $_GET['price'],
-                "Response" => $response
-            ];
+            $return['Status'] = $http_status;
+            $return['Response'] = $response;
+            return $return;
         } else {
             $status = 'failed';
 
@@ -179,12 +185,10 @@ class rayanpay
             }
 
             $error = $this->getError($http_status, 'payment_parse', $error);
-            return [
-                "Status" => $http_status,
-                "RefID" => $_GET['referenceId'],
-                "Message" => $error,
-                "Response" => $response
-            ];
+            $return['Status'] = $http_status;
+            $return['Response'] = $response;
+            $return['Message'] = $error;
+            return $return;
         }
     }
 
@@ -276,7 +280,9 @@ class rayanpay
             }
         } elseif ($method == 'payment_start') {
             switch ($error) {
-
+                case '400' :
+                    $message = 'شناسه ارسالی تکراری می باشد ';
+                    break;
                 case '401' :
                     $message = 'توکن نامعتبر';
                     break;

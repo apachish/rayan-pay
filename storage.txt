@@ -1,0 +1,1 @@
+{"10":{"clientId":"0cf77558-da05-4326-82e8-2201f86a2ddf","userName":"TechnicalTeam","password":"z3eTzIdNasbaGzzCqnfjb7Yy","baseUrl":"https:\/\/pms.rayanpay.com\/api\/v1\/"},"11":{"clientId":"0cf77558-da05-4326-82e8-2201f86a2ddf","userName":"TechnicalTeam","password":"z3eTzIdNasbaGzzCqnfjb7Yy","baseUrl":"https:\/\/pms.rayanpay.com\/api\/v1\/"}}

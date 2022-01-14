@@ -23,20 +23,16 @@ if ($result['Status'] == 200) {
             "amount" => (int)$price,
             "msisdn" => $mobile,
             "gatewayId" => 100,
-            "callbackUrl" => $rayan_pay->getUrl()."verify.php?referenceId=".$order_id."&price=".$price."&request_id=".$rayan_pay->request_id,
+            "callbackUrl" => $rayan_pay->getUrl()."verify.php?referenceId=".$order_id."&price=".$price."&request_id=".$rayan_pay->request_id."&mobile=".$mobile,
             "gateSwitchingAllowed" => true
 
         ];
         $result_start = $rayan_pay->start($result['Response'], $data);
         if ($result_start['Status'] != 200)
         {
-            echo "<br />کد خطا : ". $result_start["Status"];
-            echo $result_start["Message"];
-            echo "<br />مبلغ : ". $price;
-            echo "<br />کد پیگیری : ". $order_id;
-            echo "<br />data : ". json_encode($data);
-            echo "<br />return : ". json_encode($result_start["Response"]);
-            echo "<a href='".$_SERVER['HTTP_REFERER']."'> return form</a>";
+
+            $response = $result_start;
+            include "layout.php";
         }
         elseif ($result_start['Status'] == 200)
         {
@@ -60,3 +56,4 @@ if ($result['Status'] == 200) {
     @header('Location: ' . $rayan_pay->getUrl());
     exit;
 }
+
