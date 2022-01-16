@@ -16,7 +16,7 @@ sudo chown www-data:www-data ./storage.txt
 
 فایل فقط برای ذخیره سازی نام کاربری و اطلاعات اصلی در فرم گرفته شده  می باشد در صورت استفاده شخصی می توانید در فایل env. خود ذخیره کنید
 
-[Link Demo](https://rayanpay.apachish.ir)
+[Link Demo](https://rayanpay.com/PHPSampleCodeTest/v2/)
 
 # سرویس گرفتن توکن احراز هویت کلاینت سمت ما:
 
